@@ -1,11 +1,21 @@
 ![封面图](./resources/header.png)
 
 <p align="center">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/subframe7536/maple-font">
-  <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/subframe7536/maple-font/total">
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/subframe7536/maple-font">
+  <a href="https://trendshift.io/repositories/13165" target="_blank"><img src="https://trendshift.io/api/badge/repositories/13165" alt="subframe7536%2Fmaple-font | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+  <a href="https://hellogithub.com/repository/0601f355bd824d88b58f1af3066c486a" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=0601f355bd824d88b58f1af3066c486a&claim_uid=AO0yWRQ48ITGNqK" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+</p>
+<p align="center">
+  <img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/subframe7536/maple-font">
+  <img alt="GitHub Repo Forks" src="https://img.shields.io/github/forks/subframe7536/maple-font">
   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/subframe7536">
 </p>
+<p align="center">
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/subframe7536/maple-font">
+  <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/subframe7536/maple-font/total">
+  <img alt="GitHub Repo License" src="https://img.shields.io/github/license/subframe7536/maple-font">
+  <img alt="GitHub Repo Issues" src="https://img.shields.io/github/issues/subframe7536/maple-font">
+</p>
+
 
 <p align="center">
   <a href="#下载">下载</a> |
@@ -120,7 +130,7 @@ brew install --cask font-maple-mono-nf-cn
 
 ### Arch Linux
 
-ArchLinuxCN仓库允许下载单个软件包的zip文件，而无需下载pkgbase中的所有软件包的zip文件，但AUR不允许。(如果您有好的解决方案，请联系Cyberczy(czysheep@gmail.com))
+ArchLinuxCN 仓库允许下载单个软件包的 zip 文件，而无需下载 pkgbase 中的所有软件包的 zip 文件，但 AUR 不允许。(如果您有好的解决方案，请联系 Cyberczy(czysheep@gmail.com))
 
 #### ArchLinuxCN (推荐)
 
@@ -470,7 +480,7 @@ fonts.packages = with pkgs; [
 
 ## 使用方法 & 特性配置
 
-请参阅 [文档](./source/features/README_CN.md) 或者在 [这里](https://font.subf.dev/zh-cn/playground) 尝试。
+请参阅 [文档](./source/features/README_CN.md) 或者在 [特性测试页面](https://font.subf.dev/zh-cn/playground) 尝试。
 
 > [!note]
 > 用于自定义构建的 Web 工具仍在开发中。
@@ -510,6 +520,10 @@ fonts.packages = with pkgs; [
 
 还有一些 [命令行选项](#构建脚本用法) 用于自定义构建过程。命令行选项的优先级高于 `config.json` 中的选项。
 
+### 浏览器中构建
+
+进入 [特性测试页面](https://font.subf.dev/zh-cn/playground)，点击左下角的“自定义构建”按钮
+
 ### 使用 Github Actions
 
 您可以使用 [Github Actions](https://github.com/subframe7536/maple-font/actions/workflows/custom.yml) 来构建字体。
@@ -540,22 +554,41 @@ pip install -r requirements.txt
 python build.py
 ```
 
-- 对于 `Ubuntu` 或 `Debian`，可能还需要 `python-is-python3`
-
-如果您在安装依赖项时遇到问题，只需创建一个新的 GitHub Codespace 并在那里运行命令
+> [!TIP]
+> 对于 `Ubuntu` 或 `Debian`，可能还需要 `python-is-python3`
+>
+> 如果您在安装依赖项时遇到问题，只需创建一个新的 GitHub Codespace 并在那里运行命令
 
 #### 自定义 Nerd-Font
 
-对于自定义 `font-patcher` 参数，需要安装 `font-forge`（可能还需要 `python3-fontforge`）。
+如果您想获得固定宽度的图标，请在 `config.json` 中设置 `"nerd_font.mono": true` 或在构建脚本参数中添加 `--nf-mono` 标志。
 
-也许您还应该更改 [config.json](./config.json) 中的 `"nerd_font.extra_args"`
+如果您想获得可变宽度的图标，请在 `config.json` 中设置 `"nerd_font.propo": true` 或在构建脚本参数中添加 `--nf-propo` 标志。
 
-默认参数：`-l --careful --outputdir dir`
-- 如果 `"nerd_font.mono"` 设置为 `true`，则增加 `--mono`
+对于自定义的 `font-patcher` 参数，需要 `font-forge`（也可能需要 `python3-fontforge`）。
+
+您可能还应该在 [config.json](./config.json) 中更改 `"nerd_font.extra_args"`。
+
+默认参数： `-l --careful --outputdir dir`
+- 如果 `"nerd_font.propo"` 为 `true`，则添加 `--variable-width-glyphs`
+- 否则，如果 `"nerd_font.mono"` 为 `true`，则添加 `--mono`
 
 #### 预设
 
+如果您想要获得固定宽度的 Nerd Font 图标，只需要在 `config.json` 中设置 `"nerd_font.mono": true` 或者在构建脚本中添加 `--nf-mono` 参数即可。
+
 运行 `build.py` 时添加 `--normal` 参数，让字形不那么独特~~奇怪~~，就像 `JetBrains Mono` 一样（除了 `0` 的中间是斜线而不是点）。
+
+如果您使用的是可变字体（不推荐），请启用 `calt` 特性以使所有特性正常工作。
+
+启用的特性：
+<!-- NORMAL -->
+```
+cv01, cv02, cv33, cv34, cv35, cv36, cv61, cv62, ss05, ss06, ss07, ss08
+```
+<!-- NORMAL -->
+
+[在线预览](https://font.subf.dev/zh-cn/playground?normal)
 
 #### 字体特性强制开启
 
@@ -565,19 +598,52 @@ python build.py
 2. `disable`: 删除 `cvXX` / `ssXX` / `zero` 中的特性，即使您手动启用它，也不在生效
 3. `ignore`: 什么也不做
 
-#### 加载自定义特性文件
+#### 自定义 OpenType Feature
 
-运行 `build.py` 时添加 `--apply-fea-file` 参数，会读取 [`source/features/{regular,italic}.fea`](./source/features) 的特性文件并应用到可变字体中。您可以修改它来更改所有特性，例如删除 `calt` 中的一些连字。
+OpenType Feature 可以控制字体的内置变体和连字。您可以通过修改 OpenType Feature 来删除一些不需要的连字或特征，修改特征的触发规则或添加一些新规则。
+
+默认情况下，[`source/py/feature/`](./source/py/feature) 中的 Python 模块会生成 OpenType Feature 字符串并在构建时加载。您可以在此处修改功能或自定义标签。
+
+如果你想通过修改 OpenType Feature 文件实现，运行 `build.py` 时添加 `--apply-fea-file` 参数，会读取 [`source/features/{regular,italic}.fea`](./source/features) 的特性文件并加载。
+
+#### 无限箭头连字
+
+受 Fira Code 的启发，从 v7.3 开始，该字体默认启用无限箭头连字。由于某种原因，在使用 Hinted 字体时连字会错位，因此在 v7.4 的 Hinted 版本中默认将其移除。
+
+您可以在 `config.json` 中设置 `"infinite_arrow": true`，或在命令行标志中添加 `--infinite-arrow`。详情见 [#508](https://github.com/subframe7536/maple-font/issues/508)
+
+#### 自定义字重映射
+
+您可以通过 `config.json` 中的 `"weight_mapping"` 项修改静态字体粗细。
+
+例如，如果您想让常规字重稍微细一些，只需将 `"weight_mapping.regular"` 的数值降低（在此示例中从 400 降到 350）：
+
+```json
+{
+  "weight_mapping": {
+    "thin": 100,
+    "extralight": 200,
+    "light": 300,
+    "regular": 350,
+    "semibold": 500,
+    "medium": 600,
+    "bold": 700,
+    "extrabold": 800
+  }
+}
+```
 
 ### 中文版本
 
-默认情况下不会生成中文字体，运行 `python build.py` 时添加 `--cn` 参数，中文基字（约 130 MB）将从 GitHub 下载。
+默认情况下不会生成中文字体，运行 `python build.py` 时添加 `--cn` 参数，中文基字（约 111 MB）将从 GitHub 下载。
 
-如果您想从可变字体（约 35 MB）构建中文基字，请在 [config.json](./config.json) 中设置 `"cn.use_static_base_font": false` 并且**耐心等待**，可变字体静态化将花费大约 20-30 分钟。
+如果您想从可变字体（约 27 MB）构建中文基字，请在 [config.json](./config.json) 中设置 `"cn.use_static_base_font": false` 并且**耐心等待**，可变字体静态化将花费大约 10-30 分钟。
 
 #### 缩小中文字体的间距
 
-如果您觉得中文字符的间距**过大**，有一个**实验性**的构建选项 `cn.narrow` 或 参数 `--cn-narrow` 可以缩小间距。您可以在 [#249](https://github.com/subframe7536/maple-font/issues/249) 中查看效果并跟踪问题。
+如果您觉得中文字符的间距**过大**，有一个构建选项 `cn.narrow` 或 命令行参数 `--cn-narrow` 可以缩小间距，但是这将让字体无法被识别为等宽字体。
+
+您可以在 [#249](https://github.com/subframe7536/maple-font/issues/249#issuecomment-2871260476) 中查看效果。
 
 #### GitHub 镜像
 
@@ -591,42 +657,57 @@ python build.py
 
 ```
 usage: build.py [-h] [-v] [-d] [--debug] [-n] [--feat FEAT] [--apply-fea-file]
-                [--hinted | --no-hinted] [--liga | --no-liga] [--cn-narrow]
-                [--nerd-font | --no-nerd-font] [--cn | --no-cn] [--cn-both]
-                [--ttf-only] [--cache] [--cn-rebuild] [--archive]
+                [--hinted | --no-hinted] [--liga | --no-liga] [--keep-infinite-arrow]
+                [--infinite-arrow] [--remove-tag-liga] [--line-height LINE_HEIGHT]
+                [--nf-mono] [--nf-propo] [--cn-narrow]
+                [--cn-scale-factor CN_SCALE_FACTOR] [--nf | --no-nf] [--cn | --no-cn]
+                [--cn-both] [--ttf-only] [--least-styles] [--font-patcher] [--cache]
+                [--cn-rebuild] [--archive]
 
 ✨ Builder and optimizer for Maple Mono
 
 options:
-  -h, --help        显示此帮助信息并退出
-  -v, --version     显示程序的版本号并退出
-  -d, --dry         输出配置并退出
-  --debug           在字体名称中添加 `Debug` 后缀，跳过优化
+  -h, --help            显示此帮助信息并退出
+  -v, --version         显示程序版本号并退出
+  -d, --dry             输出配置并退出
+  --debug               在字体名称中添加 `Debug` 后缀并加快构建速度
 
 Feature Options:
-  -n, --normal      使用 normal 预设，就像带有斜杠 0 的 `JetBrains Mono`
-  --feat FEAT       强制启用字体特性，用 `,` 分隔 (例如 `--feat
-                    zero,cv01,ss07,ss08`)。对可变字体无效
-  --apply-fea-file  从 `source/features/{regular,italic}.fea` 加载特性文件到
-                    可变字体
-  --hinted          在 NF / CN / NF-CN 中使用 hinted 字体作为基础字体 (默认)
-  --no-hinted       在 NF / CN / NF-CN 中使用 unhinted 字体作为基础字体
-  --liga            保留所有连字 (默认)
-  --no-liga         删除所有连字
-  --cn-narrow       减小中文字形间距 (实验性的)
+  -n, --normal          使用 normal 预设，就像带斜杠零的 `JetBrains Mono`
+  --feat FEAT           强制启用字体特性，用 `,` 分隔（例如 `--feat
+                        zero,cv01,ss07,ss08`）。 对可变字体无效
+  --apply-fea-file      从 `source/features/{regular,italic}.fea` 加载特性文件到
+                        可变字体
+  --hinted              在 NF / CN / NF-CN 中使用 hinted 字体作为基础字体（默认）
+  --no-hinted           在 NF / CN / NF-CN 中使用 unhinted 字体作为基础字体
+  --liga                保留所有连字（默认）
+  --no-liga             删除所有连字
+  --infinite-arrow      开启无限箭头连字 (默认在 hinted 格式中禁用)
+  --remove-tag-liga     移除纯文本标签连字，例如 `[TODO]`
+  --line-height LINE_HEIGHT
+                        行高的缩放因子 (例如 1.1)
+  --nf-mono             使 Nerd Font 图标的宽度固定
+  --nf-propo            使 Nerd Font 图标的宽度不固定，覆盖 `--nf-mono`
+  --cn-narrow           减小中文/日文字形间距（同时会让系统无法识别为等宽字体）
+  --cn-scale-factor CN_SCALE_FACTOR
+                        中文/日文字形的缩放因子。格式：<因子> 或
+                        <宽度因子>,<高度因子> (例如 1.1 或 1.2,1.1)
 
 Build Options:
-  --nerd-font       构建 Nerd-Font 版本 (默认)
-  --no-nerd-font    不构建 Nerd-Font 版本
-  --cn              构建中文版本
-  --no-cn           不构建中文版本 (默认)
-  --cn-both         同时构建 `Maple Mono CN` 和 `Maple Mono NF CN`。必须启用
-                    Nerd-Font 版本
-  --ttf-only        仅构建 TTF 格式
-  --cache           重用 TTF、OTF 和 Woff2 格式的字体缓存
-  --cn-rebuild      重新静态化中文基字
-  --archive         构建带有配置和许可的字体压缩包。如果带有 `--cache`
-                    标志，则仅打包 Nerd-Font 和 CN 格式
+  --nf, --nerd-font     构建 Nerd-Font 版本（默认）
+  --no-nf, --no-nerd-font
+                        不构建 Nerd-Font 版本
+  --cn                  构建中文版本
+  --no-cn               不构建中文版本（默认）
+  --cn-both             同时构建 `Maple Mono CN` 和 `Maple Mono NF CN`。必须启用
+                        Nerd-Font 版本
+  --ttf-only            仅构建 TTF 格式
+  --least-styles        仅构建 常规 / 粗体 / 斜体 / 粗斜体 样式
+  --font-patcher        强制使用 Nerd Font Patcher 构建 NF 格式
+  --cache               重用 TTF、OTF 和 Woff2 格式的字体缓存
+  --cn-rebuild          重新静态化可变的中文基字
+  --archive             构建带有配置和许可的字体压缩包。如果带有 `--cache`
+                        标志，则仅打包 NF 和 CN 格式
 ```
 
 ## 我个人在用的其他中文字体资源
